@@ -3,10 +3,14 @@ package autoTrade.domain.ticker;
 import autoTrade.domain.BaseEntity;
 import autoTrade.domain.ExchangeType;
 import jakarta.persistence.*;
+import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
 @Entity
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Ticker extends BaseEntity {
 
     @Id
@@ -18,6 +22,12 @@ public class Ticker extends BaseEntity {
 
     private String symbol;
 
-    private Long price;
+    private String price;
 
+    @Builder
+    private Ticker(ExchangeType exchangeType, String symbol, String price) {
+        this.exchangeType = exchangeType;
+        this.symbol = symbol;
+        this.price = price;
+    }
 }

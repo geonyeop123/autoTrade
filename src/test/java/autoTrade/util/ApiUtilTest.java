@@ -1,59 +1,27 @@
 package autoTrade.util;
 
+import autoTrade.domain.ExchangeType;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.web.reactive.function.client.WebClient;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.LinkedHashMap;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 class ApiUtilTest {
 
-    @DisplayName("")
+    @DisplayName("현재가를 조회를 요청하여 값을 반환받을 수 있다.")
     @Test
-    void getBithumb() {
+    void getTickers() throws Exception{
+
+
         // given
         ApiUtil apiUtil = new ApiUtil();
-        WebClient webClient = apiUtil.getWebClient("https://api.bithumb.com/");
-        Object o = apiUtil.get(webClient, "v1/ticker?markets=KRW-BTC");
-        Object o1 = apiUtil.get(webClient, "v1/ticker?markets=KRW-USDT");
-        System.out.println(o);
-        System.out.println(o1);
-
-
-        // when
-
+        List<LinkedHashMap<String, Object>> listMap = apiUtil.getTickers(ExchangeType.BITHUMB, new String[]{"KRW-BTC", "KRW-USDT"});
 
         // then
-    }
-
-    @DisplayName("")
-    @Test
-    void getUpbit() {
-        // given
-        ApiUtil apiUtil = new ApiUtil();
-        WebClient webClient = apiUtil.getWebClient("https://api.upbit.com/");
-        Object o = apiUtil.get(webClient, "v1/ticker?markets=KRW-BTC");
-        System.out.println(o);
-
-        // when
-
-
-        // then
-    }
-
-    @DisplayName("")
-    @Test
-    void getBinance() {
-        // given
-        ApiUtil apiUtil = new ApiUtil();
-        WebClient webClient = apiUtil.getWebClient("https://fapi.binance.com/");
-        Object o = apiUtil.get(webClient, "fapi/v1/ticker/price?symbol=BTCUSDT");
-        System.out.println(o);
-
-        // when
-
-
-        // then
+        assertThat(listMap).hasSize(2);
     }
 
 }
