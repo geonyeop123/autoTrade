@@ -1,16 +1,13 @@
 package autoTrade.domain.exchangeRate;
 
 import autoTrade.domain.BaseEntity;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -19,16 +16,24 @@ public class ExchangeRate extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "exchange_rate_id")
     private Long id;
 
     private double price;
 
-    private LocalDate date;
+    private LocalDateTime datetime;
 
     @Builder
-    private ExchangeRate(Long id, double price, LocalDate date) {
+    private ExchangeRate(Long id, double price, LocalDateTime datetime) {
         this.id = id;
         this.price = price;
-        this.date = date;
+        this.datetime = datetime;
+    }
+
+    public static ExchangeRate of(double price) {
+        return ExchangeRate.builder()
+                .price(price)
+                .datetime(LocalDateTime.now())
+                .build();
     }
 }

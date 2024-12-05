@@ -15,6 +15,7 @@ public class Ticker extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ticker_id")
     private Long id;
 
     @Enumerated(EnumType.STRING)

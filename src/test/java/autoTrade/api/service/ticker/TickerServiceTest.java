@@ -30,9 +30,9 @@ class TickerServiceTest {
 
     @DisplayName("현재 시점 가상화폐의 가격을 저장한다.")
     @Test
-    void saveByCurrentTickers() throws Exception {
+    void createByCurrentTicker() throws Exception {
         // given // when
-        tickerService.saveByCurrentTickers();
+        tickerService.createByCurrentTicker();
 
         // then
         List<Ticker> tickers = tickerRepository.findAll();

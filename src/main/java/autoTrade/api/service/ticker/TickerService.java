@@ -22,7 +22,7 @@ public class TickerService {
     private final TickerClient tickerClient;
 
     @Transactional
-    public void saveByCurrentTickers() throws Exception{
+    public void createByCurrentTicker() throws Exception {
 
         HashMap<ExchangeType, String[]> tickersRequestMap = new HashMap<>();
 
@@ -31,7 +31,9 @@ public class TickerService {
 
         List<Ticker> tickers = tickerClient.getTickers(tickersRequestMap);
 
-        tickerRepository.saveAll(tickers);
+        List<Ticker> savedTickers = tickerRepository.saveAll(tickers);
+
+
 
     }
 

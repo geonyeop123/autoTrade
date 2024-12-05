@@ -7,7 +7,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -15,19 +15,20 @@ public class ExchangeRateCreateResponse extends BaseEntity {
 
     private Long id;
     private double price;
-    private LocalDate date;
+    private LocalDateTime date;
 
     @Builder
-    private ExchangeRateCreateResponse(Long id, double price, LocalDate date) {
+    private ExchangeRateCreateResponse(Long id, double price, LocalDateTime date) {
         this.id = id;
         this.price = price;
         this.date = date;
     }
 
-    private static ExchangeRateCreateResponse of(ExchangeRate exchangeRate){
+    public static ExchangeRateCreateResponse of(ExchangeRate exchangeRate){
         return ExchangeRateCreateResponse.builder()
+                .id(exchangeRate.getId())
                 .price(exchangeRate.getPrice())
-                .date(exchangeRate.getDate())
+                .date(exchangeRate.getDatetime())
                 .build();
     }
 }
