@@ -1,5 +1,6 @@
 package autoTrade.api.service.ticker;
 
+import autoTrade.api.service.ticker.response.TickerCreateResponse;
 import autoTrade.domain.ticker.Ticker;
 import autoTrade.domain.ticker.TickerRepository;
 import org.junit.jupiter.api.AfterEach;
@@ -32,7 +33,7 @@ class TickerServiceTest {
     @Test
     void createByCurrentTicker() throws Exception {
         // given // when
-        tickerService.createByCurrentTicker();
+        TickerCreateResponse byCurrentTicker = tickerService.createByCurrentTicker();
 
         // then
         List<Ticker> tickers = tickerRepository.findAll();

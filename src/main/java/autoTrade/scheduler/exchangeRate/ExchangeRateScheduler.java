@@ -3,12 +3,14 @@ package autoTrade.scheduler.exchangeRate;
 import autoTrade.api.controller.exchangeRate.ExchangeRateController;
 import autoTrade.api.service.exchangeRate.response.ExchangeRateCreateResponse;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Profile;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 @Component
 @Profile("!test")
+@Slf4j
 @RequiredArgsConstructor
 public class ExchangeRateScheduler {
 
@@ -16,10 +18,9 @@ public class ExchangeRateScheduler {
 
     @Scheduled(fixedDelay = 5000) // 5초 이후 실행
     public void getExchangeRate() {
-        System.out.println("rate start");
         ExchangeRateCreateResponse exchangeRateCreateResponse = exchangeRateController.saveExchangeRate().getData();
-        System.out.println(exchangeRateCreateResponse.getPrice());
-        System.out.println(exchangeRateCreateResponse.getDate());
+        log.info("get rate : {}", exchangeRateCreateResponse.getPrice());
+
     }
 
 }

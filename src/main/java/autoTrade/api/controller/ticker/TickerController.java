@@ -1,6 +1,8 @@
 package autoTrade.api.controller.ticker;
 
+import autoTrade.api.ApiResponse;
 import autoTrade.api.service.ticker.TickerService;
+import autoTrade.api.service.ticker.response.TickerCreateResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,8 +14,9 @@ public class TickerController {
     private final TickerService tickerService;
 
     @PostMapping("/api/v1/ticker/create")
-    public void createTicker() {
+    public ApiResponse<TickerCreateResponse> createTicker() throws Exception {
 
+        return ApiResponse.ok(tickerService.createByCurrentTicker());
     }
 
 }

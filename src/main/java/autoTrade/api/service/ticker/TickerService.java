@@ -2,6 +2,7 @@ package autoTrade.api.service.ticker;
 
 
 import autoTrade.api.client.TickerClient;
+import autoTrade.api.service.ticker.response.TickerCreateResponse;
 import autoTrade.domain.ExchangeType;
 import autoTrade.domain.ticker.Ticker;
 import autoTrade.domain.ticker.TickerRepository;
@@ -22,7 +23,7 @@ public class TickerService {
     private final TickerClient tickerClient;
 
     @Transactional
-    public void createByCurrentTicker() throws Exception {
+    public TickerCreateResponse createByCurrentTicker() throws Exception {
 
         HashMap<ExchangeType, String[]> tickersRequestMap = new HashMap<>();
 
@@ -33,8 +34,7 @@ public class TickerService {
 
         List<Ticker> savedTickers = tickerRepository.saveAll(tickers);
 
-
-
+        return TickerCreateResponse.of(savedTickers);
     }
 
 }

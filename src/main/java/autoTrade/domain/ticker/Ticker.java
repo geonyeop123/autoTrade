@@ -25,6 +25,15 @@ public class Ticker extends BaseEntity {
 
     private String price;
 
+    public String getInfo() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("symbol : ");
+        sb.append(symbol);
+        sb.append(", price : ");
+        sb.append(price);
+        return sb.toString();
+    }
+
     @Builder
     private Ticker(ExchangeType exchangeType, String symbol, String price) {
         this.exchangeType = exchangeType;
