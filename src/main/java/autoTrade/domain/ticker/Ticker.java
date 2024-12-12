@@ -34,6 +34,12 @@ public class Ticker extends BaseEntity {
         return sb.toString();
     }
 
+    public boolean equals(Ticker ticker){
+        return this.exchangeType == ticker.exchangeType
+                && this.symbol.equals(ticker.symbol)
+                && this.price.equals(ticker.price);
+    }
+
     @Builder
     private Ticker(ExchangeType exchangeType, String symbol, String price) {
         this.exchangeType = exchangeType;
