@@ -32,6 +32,8 @@ public class TickerService {
 
         List<Ticker> tickers = tickerClient.getTickers(tickersRequestMap);
 
+
+
         List<Ticker> savedTickers = tickerRepository.saveAll(tickers);
 
         return TickerCreateResponse.of(savedTickers);
