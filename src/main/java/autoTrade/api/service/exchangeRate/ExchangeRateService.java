@@ -25,9 +25,20 @@ public class ExchangeRateService {
         double exchangeRate = getExchangeRate();
         ExchangeRate exchangeRateEntity = ExchangeRate.of(exchangeRate);
 
-        ExchangeRate savedExchangeRate = exchangeRateRepository.save(exchangeRateEntity);
+        ExchangeRate savedExchangeRate = saveExchangeRate(exchangeRateEntity);
 
         return ExchangeRateCreateResponse.of(savedExchangeRate);
+    }
+
+    private ExchangeRate saveExchangeRate(ExchangeRate exchangeRate){
+        ExchangeRate latestExchangeRate = exchangeRateRepository.findLatestExchangeRate();
+        ExchangeRate resultExchangeRate = latestExchangeRate;
+        if(latestExchangeRate == null ||
+                exchangeRate.getPrice() != latestExchangeRate.getPrice()){
+            resultExchangeRate = exchangeRateRepository.save(exchangeRate);
+        }
+
+        return resultExchangeRate;
     }
 
     private double getExchangeRate() {
