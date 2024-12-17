@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class CreatePremiumResponse {
+public class PremiumCreateResponse {
 
     private Long id;
 
@@ -19,8 +19,18 @@ public class CreatePremiumResponse {
     private Ticker usBtcTicker;
     private double premiumRate;
 
+    public String getInfo() {
+
+        return  String.format("""
+               
+                KR Ticker : %,d
+                US Ticker : %s
+                exchange rate : %.1f
+                premium rate : %s""", Integer.valueOf(krBtcTicker.getPrice()), usBtcTicker.getPrice(), exchangeRate.getPrice(), premiumRate);
+    }
+
     @Builder
-    private CreatePremiumResponse(Long id, ExchangeRate exchangeRate, Ticker krBtcTicker, Ticker usdtTicker, Ticker usBtcTicker, double premiumRate) {
+    private PremiumCreateResponse(Long id, ExchangeRate exchangeRate, Ticker krBtcTicker, Ticker usdtTicker, Ticker usBtcTicker, double premiumRate) {
         this.id = id;
         this.exchangeRate = exchangeRate;
         this.krBtcTicker = krBtcTicker;

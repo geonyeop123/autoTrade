@@ -1,6 +1,6 @@
 package autoTrade.api.service.premium;
 
-import autoTrade.api.service.premium.response.CreatePremiumResponse;
+import autoTrade.api.service.premium.response.PremiumCreateResponse;
 import autoTrade.domain.exchangeRate.ExchangeRate;
 import autoTrade.domain.exchangeRate.ExchangeRateRepository;
 import autoTrade.domain.premium.Premium;
@@ -24,7 +24,8 @@ public class PremiumService {
     private final TickerRepository tickerRepository;
     private final ExchangeRateRepository exchangeRateRepository;
 
-    public CreatePremiumResponse createPremium() {
+    @Transactional
+    public PremiumCreateResponse createPremium() {
 
         List<Ticker> tickers = tickerRepository.findLatestTickersByType();
         ExchangeRate exchangeRate = exchangeRateRepository.findLatestExchangeRate();
@@ -33,12 +34,12 @@ public class PremiumService {
 
         Premium savedPremium = premiumRepository.save(premium);
 
-        return CreatePremiumResponse
-                .builder()
+        return PremiumCreateResponse.builder()
                 .id(savedPremium.getId())
                 .krBtcTicker(premium.getKrBtcTicker())
                 .usdtTicker(premium.getUsdtTicker())
                 .usBtcTicker(premium.getUsBtcTicker())
+                .exchangeRate(premium.getExchangeRate())
                 .premiumRate(premium.getPremiumRate())
                 .build();
     }

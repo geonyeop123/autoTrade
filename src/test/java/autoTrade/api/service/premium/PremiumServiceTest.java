@@ -1,6 +1,6 @@
 package autoTrade.api.service.premium;
 
-import autoTrade.api.service.premium.response.CreatePremiumResponse;
+import autoTrade.api.service.premium.response.PremiumCreateResponse;
 import autoTrade.domain.ExchangeType;
 import autoTrade.domain.exchangeRate.ExchangeRate;
 import autoTrade.domain.exchangeRate.ExchangeRateRepository;
@@ -54,7 +54,7 @@ class PremiumServiceTest {
         exchangeRateRepository.save(ExchangeRate.of(1400));
 
         // when
-        CreatePremiumResponse premium = premiumService.createPremium();
+        PremiumCreateResponse premium = premiumService.createPremium();
         List<Premium> premiums = premiumRepository.findAll();
 
         // then
