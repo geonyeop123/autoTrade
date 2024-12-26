@@ -6,12 +6,12 @@ import lombok.Getter;
 import java.time.LocalDate;
 
 @Getter
-public class ExchangeRateServiceCreateRequest {
+public class ExchangeRateCreateRequest {
 
     LocalDate date;
 
     @Builder
-    private ExchangeRateServiceCreateRequest(LocalDate date) {
+    private ExchangeRateCreateRequest(LocalDate date) {
         this.date = date;
     }
 }
