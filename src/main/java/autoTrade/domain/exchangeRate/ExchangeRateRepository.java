@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ExchangeRateRepository extends JpaRepository<ExchangeRate, Long> {
-    @Query("SELECT e FROM ExchangeRate e ORDER BY e.datetime DESC LIMIT 1")
+    @Query("SELECT e FROM ExchangeRate e WHERE e.createType = 'AUTO' ORDER BY e.datetime DESC LIMIT 1")
     ExchangeRate findLatestExchangeRate();
 }

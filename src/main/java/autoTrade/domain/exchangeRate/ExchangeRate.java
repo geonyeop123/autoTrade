@@ -46,6 +46,7 @@ public class ExchangeRate extends BaseEntity {
         return ExchangeRate.builder()
                 .price(price)
                 .datetime(LocalDateTime.now())
+                .createType(createType)
                 .build();
     }
 }
