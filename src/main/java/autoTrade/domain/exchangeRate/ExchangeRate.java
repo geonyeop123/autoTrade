@@ -23,14 +23,26 @@ public class ExchangeRate extends BaseEntity {
 
     private LocalDateTime datetime;
 
-    @Builder
+    @Enumerated(EnumType.STRING)
+    private CreateType createType;
+
     private ExchangeRate(Long id, double price, LocalDateTime datetime) {
+        this(id, price, datetime, CreateType.AUTO);
+    }
+
+    @Builder
+    private ExchangeRate(Long id, double price, LocalDateTime datetime, CreateType createType) {
         this.id = id;
         this.price = price;
         this.datetime = datetime;
+        this.createType = createType;
     }
 
     public static ExchangeRate of(double price) {
+        return of(price, CreateType.AUTO);
+    }
+
+    public static ExchangeRate of(double price, CreateType createType) {
         return ExchangeRate.builder()
                 .price(price)
                 .datetime(LocalDateTime.now())
