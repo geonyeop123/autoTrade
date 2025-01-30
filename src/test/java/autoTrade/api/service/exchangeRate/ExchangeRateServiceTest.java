@@ -1,6 +1,7 @@
 package autoTrade.api.service.exchangeRate;
 
 import autoTrade.api.service.exchangeRate.response.ExchangeRateCreateResponse;
+import autoTrade.domain.exchangeRate.CreateType;
 import autoTrade.domain.exchangeRate.ExchangeRate;
 import autoTrade.domain.exchangeRate.ExchangeRateRepository;
 import org.junit.jupiter.api.AfterEach;
@@ -41,6 +42,21 @@ class ExchangeRateServiceTest {
         assertThat(exchangeRates).hasSize(1);
         assertThat(exchangeRates.get(0).getDatetime()).isEqualTo(response.getDate());
         assertThat(exchangeRates.get(0).getPrice()).isEqualTo(response.getPrice());
+    }
+
+    @DisplayName("수동으로 환율을 저장한다.")
+    @Test
+    void test() {
+        // given
+        double exchangeRate = 1440.0;
+
+        // when
+        ExchangeRate entity = exchangeRateService.createExchangeRate(exchangeRate);
+
+        // then
+        List<ExchangeRate> exchangeRates = exchangeRateRepository.findAll();
+        assertThat(exchangeRates.get(0).getCreateType()).isEqualTo(CreateType.MANUAL);
+        assertThat(exchangeRates.get(0).getPrice()).isEqualTo(exchangeRate);
     }
 
 }

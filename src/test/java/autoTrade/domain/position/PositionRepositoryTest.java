@@ -46,12 +46,14 @@ class PositionRepositoryTest {
                 .exchangeType(ExchangeType.BITHUMB)
                 .symbol("KRW-BTC")
                 .price("140000000")
+                .quantity(0.117)
                 .build();
 
         PositionTicker usPositionTicker = PositionTicker.builder()
                 .exchangeType(ExchangeType.BINANCE)
                 .symbol("BTCUSDT")
                 .price("96000")
+                .quantity(0.117)
                 .build();
 
         ExchangeRate saveExchangeRate = exchangeRateRepository.save(exchangeRate);

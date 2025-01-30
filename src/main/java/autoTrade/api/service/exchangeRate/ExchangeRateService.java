@@ -2,6 +2,7 @@ package autoTrade.api.service.exchangeRate;
 
 
 import autoTrade.api.service.exchangeRate.response.ExchangeRateCreateResponse;
+import autoTrade.domain.exchangeRate.CreateType;
 import autoTrade.domain.exchangeRate.ExchangeRate;
 import autoTrade.domain.exchangeRate.ExchangeRateRepository;
 import autoTrade.util.ApiUtilRequest;
@@ -68,4 +69,9 @@ public class ExchangeRateService {
                 .build();
     }
 
+    @Transactional
+    public ExchangeRate createExchangeRate(double exchangeRate){
+        ExchangeRate exchangeRateEntity = ExchangeRate.of(exchangeRate, CreateType.MANUAL);
+        return saveExchangeRate(exchangeRateEntity);
+    }
 }

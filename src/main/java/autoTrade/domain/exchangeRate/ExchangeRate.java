@@ -49,4 +49,14 @@ public class ExchangeRate extends BaseEntity {
                 .createType(createType)
                 .build();
     }
+
+    @Override
+    public String toString() {
+        return "ExchangeRate{" +
+                "id=" + id +
+                ", price=" + price +
+                ", datetime=" + datetime +
+                ", createType=" + createType +
+                '}';
+    }
 }

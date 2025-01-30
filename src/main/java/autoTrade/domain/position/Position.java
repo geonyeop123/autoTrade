@@ -2,6 +2,7 @@ package autoTrade.domain.position;
 
 import autoTrade.domain.BaseEntity;
 import autoTrade.domain.exchangeRate.ExchangeRate;
+import autoTrade.domain.member.Member;
 import autoTrade.domain.positionTicker.PositionTicker;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -21,6 +22,10 @@ public class Position extends BaseEntity {
     @Column(name = "position_id")
     private Long id;
 
+    @JoinColumn(name = "member_id")
+    @ManyToOne(fetch = LAZY)
+    private Member member;
+
     @JoinColumn(name = "kr_position_ticker_id")
     @OneToOne(fetch = LAZY, cascade = CascadeType.ALL)
     private PositionTicker krTicker;
@@ -38,7 +43,8 @@ public class Position extends BaseEntity {
     private boolean alertYn;
 
     @Builder
-    private Position(PositionTicker krTicker, PositionTicker usTicker, ExchangeRate exchangeRate, boolean sellYn, boolean alertYn) {
+    private Position(Member member, PositionTicker krTicker, PositionTicker usTicker, ExchangeRate exchangeRate, boolean sellYn, boolean alertYn) {
+        this.member = member;
         this.krTicker = krTicker;
         this.usTicker = usTicker;
         this.exchangeRate = exchangeRate;

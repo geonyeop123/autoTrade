@@ -25,10 +25,24 @@ public class PositionTicker {
 
     private String price;
 
+    private double quantity;
+
     @Builder
-    private PositionTicker(ExchangeType exchangeType, String symbol, String price) {
+    private PositionTicker(ExchangeType exchangeType, String symbol, String price, double quantity) {
         this.exchangeType = exchangeType;
         this.symbol = symbol;
         this.price = price;
+        this.quantity = quantity;
+    }
+
+    @Override
+    public String toString() {
+        return "PositionTicker{" +
+                "id=" + id +
+                ", exchangeType=" + exchangeType +
+                ", symbol='" + symbol + '\'' +
+                ", price='" + price + '\'' +
+                ", quantity=" + quantity +
+                '}';
     }
 }
